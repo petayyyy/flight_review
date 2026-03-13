@@ -8,8 +8,7 @@ services:
     env_file: .env
     volumes:
       - ./data:/opt/data
-      - ${PWD}/app/config_default.ini:/opt/service/config_default.ini:ro # Absolute for volume a file.
-    restart: always
+      - ./app/config_default.ini:/opt/service/config_default.ini:ro
   nginx:
     build:
       context: ./nginx
@@ -26,5 +25,3 @@ services:
       - flight_review_app
     depends_on:
       - flight_review_app
-    restart: always
-

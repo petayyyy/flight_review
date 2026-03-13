@@ -13,6 +13,8 @@ RUN apt-get	update && \
 RUN mkdir -p /opt/service/data
 COPY [".", "/opt/service/"]
 
+RUN chmod +x /opt/service/run.sh
+
 WORKDIR /opt/service
 EXPOSE 5006
 CMD ["/opt/service/run.sh"]
