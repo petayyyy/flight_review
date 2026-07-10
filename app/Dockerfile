@@ -13,7 +13,9 @@ RUN apt-get	update && \
 RUN mkdir -p /opt/service/data
 COPY [".", "/opt/service/"]
 
-RUN chmod +x /opt/service/run.sh
+# Нормализуем окончания строк: с Windows-чекаута run.sh приезжает с CRLF,
+# и exec падает с «no such file or directory» (ядро ищет '/bin/bash\r').
+RUN sed -i 's/\r$//' /opt/service/run.sh && chmod +x /opt/service/run.sh
 
 WORKDIR /opt/service
 EXPOSE 5006
